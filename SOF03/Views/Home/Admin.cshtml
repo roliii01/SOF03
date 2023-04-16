@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<Job>
+@inject SignInManager<SiteUser> SignInManager
+@inject UserManager<SiteUser> UserManager
+
+@foreach (var job in Model.GroupBy(t => t.Name))
+{
+    <li>
+        @job.Key
+        <ul>
+            @foreach (var item in job)
+            {
+                <li>
+                    @item.Owner.FirstName @item.Owner.LastName
+                    <a href="AdminDelete?uid=@item.Uid">Delete</a>
+                </li>
+            }
+        </ul>
+    </li>
+}
